@@ -1,28 +1,38 @@
-const setup = {
-
-    deftport: 3000,
+let setup = {
 
     ddmode: EV.DEPLOY_MODE || 'test',
 
+    auth: {
+        noip: {
+            hostname: 'sma01chksapi.sytes.net',
+            user:     'luizpascoal87@gmail.com',
+            pass:     'gagau234'
+        }
+    },
+
+    port: {
+        server: Number(EV.PORT_SERVER) || 3000,
+        adbLocal: Number(EV.PORT_ADB_LOCAL) || 5555,
+    }, 
+
     cashout: {
-        min: EV.MIN_CASHOUT || 100,
-        max: EV.MAX_CASHOUT || 270
+        min: Number(EV.MIN_CASHOUT) || 100,
+        max: Number(EV.MAX_CASHOUT) || 270
     },
 
     delay: {
-        ggrate: EV.DELAY_GGRATE || 3
+        ggrate: Number(EV.DELAY_GGRATE) || 3
     },
 
     chance: {
-        flv: EV.CHANCE_FLV || 30,
-        spAddress: EV.CHANCE_SPADDR || 60,
-        mobileUserAgent: EV.CHANCE_MOBUA || 70
+        flv: Number(EV.CHANCE_FLV) || 30,
+        spAddress: Number(EV.CHANCE_SPADDR) || 60,
+        mobileUserAgent: Number(EV.CHANCE_MOBUA) || 70
     }
 }
 
 module.exports = {
     set () {
-        const SS = setup;
-        Object.assign(global, { SS })
+        Object.assign(global, { SS: setup })
     }
 }

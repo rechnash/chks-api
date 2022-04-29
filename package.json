@@ -14,6 +14,7 @@
     "express": "~4.16.1",
     "morgan": "~1.9.1",
     "needle": "^3.1.0",
+    "no-ip": "^1.0.2",
     "rate-limiter-flexible": "^2.3.6",
     "user-agents": "^1.0.994"
   },

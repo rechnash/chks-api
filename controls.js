@@ -16,14 +16,6 @@ module.exports = {
         }
     }
 }
-function pickUserAgentSTR () {
-
-}
-
-function pickProxyURL () {
-
-}
-
 
 function infoTextToObject (_inft) {
 
