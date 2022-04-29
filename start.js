@@ -73,7 +73,9 @@ function initExpressServer () {
 
     // ...finally!
     // * declare router
-    $app.use('/', serverMiddelay, router)
+    $app.use('/', 
+        serverMiddelay, 
+            router)
 
     // routeless response
     $app.get('/', (req, res) => {
@@ -84,20 +86,20 @@ function initExpressServer () {
 
     // ...start the server 
     // ...by listening on a port
-    $app.listen(SS.port.server, '0.0.0.0', port => {
+    $app.listen(SS.port.server, port => {
 
         clog('   ...$app was succesfully setup!\n')
 
         if (EV.NODE_ENV === 'deployment') {
             if (SS.ddlog === 'false') {
-                console.log = clog == (...args) => {}
+                console.log = clog = (...args) => {}
             }
         }
 
         UU.logPort(SS.port.server)(port)
     })
 
-    $app = app;
+    app = $app;
 }
 
 function serverMiddelay (req, res, next) {  

@@ -1,6 +1,7 @@
 let setup = {
 
     ddmode: EV.DEPLOY_MODE || 'test',
+    ddlog: 'true',
 
     auth: {
         noip: {
