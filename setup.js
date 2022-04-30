@@ -5,7 +5,7 @@ let setup = {
 
     auth: {
         noip: {
-            hostname: 'sma01chksapi.sytes.net',
+            hostname: 'smcorezin.servehttp.com',
             user:     'luizpascoal87@gmail.com',
             pass:     'gagau234'
         }

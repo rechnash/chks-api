@@ -6,12 +6,29 @@ module.exports = {
 
         async handler (req, res) {
 
-            console.log('   ...running /checkout', '\n')
+            clog('   ...running /checkout', '\n')
 
-            const infotxt = req.body;
+            const infotxt = req.params.infotxt;
 
-            console.log('   * info: ', info, '\n')
-            console.log('   ')
+            clog('   * infotxt: ', infotxt, '\n')
+            clog('   ')
+
+            res.send({ infotxt }).end()
+
+        }
+    },
+
+    '/online' : {
+
+        method: 'get',
+
+        async handler (req, res) {
+
+            clog('   ...running /test/online', '\n')
+            
+            res.status(200)
+                .send({res: true})
+                    .end()
 
         }
     }

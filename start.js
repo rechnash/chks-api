@@ -20,23 +20,25 @@ const   express = require('express'),
         { RateLimiterMemory } = require('rate-limiter-flexible');
 
 const   initAdbLocal = require('./library/initAdbLocal.js'),
-        initNoIpDUC = require('./library/initNoIpDUC.js');
+        initTelebit = require('./library/initTelebit.js');
 
 // defined by and at
 // the of initExpressServer()
 var app;
 
 // * inits
-initAdbLocal(() => {
-    initNoIpDUC(() => {
-        initExpressServer();
+initExpressServer(port => {
+    initTelebit(port, () => {
+        initAdbLocal(() => {
+            clog('  ...all sets succesfully.')
+        })
     })
 })
 
 // define start app
 // on a closed function
 // so that it can be async
-function initExpressServer () {
+function initExpressServer (cb1 = () => {}) {
 
     // coonfig logs
     clog('   EV.NODE_ENV',               `"${ EV.NODE_ENV }"`, '\n')
@@ -92,22 +94,21 @@ function initExpressServer () {
 
         if (EV.NODE_ENV === 'deployment') {
             if (SS.ddlog === 'false') {
+                clog('  Disabling console logging...')
                 console.log = clog = (...args) => {}
             }
         }
 
-        UU.logPort(SS.port.server)(port)
+        UU.logPort(SS.port.server)(port); cb1(port);
     })
 
-    app = $app;
-}
-
-function serverMiddelay (req, res, next) {  
+    function serverMiddelay (req, res, next) {  
     
-    clog('   ...running serverMiddelay()')
-    clog(`   ...awaiting SS.delay.ggrate`, SS.delay.ggrate)
-    
-    setTimeout(() => {
-        next()
-    }, 1000 * SS.delay.ggrate)
+        clog('   ...running serverMiddelay()')
+        clog(`   ...awaiting SS.delay.ggrate`, SS.delay.ggrate)
+        
+        setTimeout(() => {
+            next()
+        }, 1000 * SS.delay.ggrate)
+    }
 }

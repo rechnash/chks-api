@@ -1,8 +1,8 @@
 const NoIP = require('no-ip')
 
-function initNoIpDUC (cb) {
+function initTelebit (cb) {
 
-    clog('\n    ...connecting NoIP DUC: initNoIpDUC() \n')
+    clog('\n    ...connecting NoIP DUC: initTelebit() \n')
     
     try {
         
@@ -14,16 +14,19 @@ function initNoIpDUC (cb) {
         })
          
         noip.on('success', (isChanged, ip) => {
+            
             clog('\n    ...connection NoIP DUC started successfully. \n')
-            cb({isChanged, ip}, null)
+            cb({ isChanged, ip }, null)
+
+            noip.start()
+            noip.update() // Manual update, you can also provide a custom IP address
         })
          
-        noip.start()
-        noip.update() // Manual update, you can also provide a custom IP address
+        
         
     } catch (err) {
         cerr('  Fail at new NoIP', err)
     }
 }
 
-module.exports = initNoIpDUC;
+module.exports = initTelebit;
